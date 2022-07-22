@@ -113,8 +113,6 @@ def numero_a_romano(numero,ubicacion):
         return caract_romanos[0] + caract_romanos[1]
     elif numero == 5:
         return caract_romanos[1]
-    elif numero == 6:
-        return caract_romanos[1] + caract_romanos[0]
     elif numero < 9:
         return caract_romanos[1] + caract_romanos[0] * (numero-5)
     else:
