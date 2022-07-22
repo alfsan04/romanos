@@ -12,6 +12,7 @@ f) 4.5 -> RomanNumberError("Debe ser un entero")
 '''
 
 
-def test_VALOR_1994():
-    assert entero_a_romano(1994) == 'MCMXCIV'
+
+def test_descomposicion_336():
+    assert entero_a_romano(336) == '0336'
 

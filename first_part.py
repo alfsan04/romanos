@@ -93,10 +93,54 @@ def entero_a_romano(numero):
     return descomposicion, numero_romano
 '''
 
+'''
+Segunda solución con funciones
+def dentro_del_numero(posicion):
+    if posicion == 'miles':
+        return ('M','','')
+    elif posicion == 'centenas':
+        return ('C','D','M')
+    elif posicion == 'decenas':
+        return ('X','L','C')
+    elif posicion == 'unidades':
+        return ('I','V','X')
+
+def numero_a_romano(numero,ubicacion):
+    caract_romanos = dentro_del_numero(ubicacion)
+    if numero < 4:
+        return caract_romanos[0] * numero
+    elif numero == 4:
+        return caract_romanos[0] + caract_romanos[1]
+    elif numero == 5:
+        return caract_romanos[1]
+    elif numero == 6:
+        return caract_romanos[1] + caract_romanos[0]
+    elif numero < 9:
+        return caract_romanos[1] + caract_romanos[0] * (numero-5)
+    else:
+        return caract_romanos[0] + caract_romanos[2]
+
+def entero_a_romano(num):
+    numero_romano = ''
+    longitud = {4:'miles',3:'centenas',2:'decenas',1:'unidades'}
+    num = list(num)
+    for pos,i in enumerate(num):
+        numero_romano = numero_romano + numero_a_romano(int(i),longitud[len(num)-pos])
+    return numero_romano
+'''
+
 def entero_a_romano(numero):
-    
-    return ''
+    numero = str(numero)
+    longitud = len(numero)
 
-numero_decimal = 2327
+    if longitud < 4:
+        numero = '{:0>4s}'.format(numero)
 
-print(entero_a_romano(numero_decimal))
+    digitos = list(numero)
+    return numero
+ 
+
+
+#numero_decimal = input("Elige un número entre 1 y 3999: ")
+
+#print(entero_a_romano(numero_decimal))
