@@ -128,16 +128,19 @@ def entero_a_romano(num):
 '''
 
 def entero_a_romano(numero):
-    numero = str(numero)
-    longitud = len(numero)
 
-    if longitud < 4:
-        numero = '{:0>4s}'.format(numero)
-
+    numero = '{:0>4d}'.format(numero)
     digitos = list(numero)
-    return numero
+
+    longitud = len(digitos)
+    for ix in range(longitud):
+        longitud -= 1
+        digitos[ix] = digitos[ix] + '0' * longitud
+
+    return digitos
  
 
+entero_a_romano(336)
 
 #numero_decimal = input("Elige un número entre 1 y 3999: ")
 
