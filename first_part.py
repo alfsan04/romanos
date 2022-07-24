@@ -70,14 +70,12 @@ def entero_a_romano(numero):
     digitos = list(numero)
 
     longitud = len(digitos)
+    traduccion = '' 
     for ix in range(longitud):
         longitud -= 1
         digitos[ix] = digitos[ix] + '0' * longitud
-
-    #procesamos millares
-    traduccion = ''
-    for digito in digitos:
-        traduccion += componentes.get(int(digito), '')
+        traduccion += componentes.get(int(digitos[ix]), '')
+        ix += 1
     
     return traduccion
 
