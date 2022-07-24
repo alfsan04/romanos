@@ -20,22 +20,25 @@ numero_romano = (
     (1000, 'M'), (500, 'D'), (100, 'C'), (50, 'L'), (10, 'X'), (5, 'V'), (1, 'I')
     )
 
-centenas = (
-    (100,'C'),(200,'CC'),(300,'CCC'),
-    (400,'CD'),(500,'D'),(600,'DC'),
-    (700,'DCC'),(800,'DCCC'),(900,'CM')
-)
-
-decenas = (
-    (10,'X'),(20,'XX'),(30,'XXX'),
-    (40,'XL'),(50,'L'),(60,'LX'),
-    (70,'LXX'),(80,'LXXX'),(90,'XC')
-)
-
-unidades = (
-    (1,'I'),(2,'II'),(3,'III'),
-    (4,'IV'),(5,'V'),(6,'VI'),
-    (7,'VII'),(8,'VIII'),(9,'IX')
+componentes = (
+    ( #millares
+        (1000, 'M'), (2000, 'MM'), (3000, 'MMM')
+    ),
+    ( #centenas
+        (100,'C'),(200,'CC'),(300,'CCC'),
+        (400,'CD'),(500,'D'),(600,'DC'),
+        (700,'DCC'),(800,'DCCC'),(900,'CM')
+    ),
+    ( #decenas
+        (10,'X'),(20,'XX'),(30,'XXX'),
+        (40,'XL'),(50,'L'),(60,'LX'),
+        (70,'LXX'),(80,'LXXX'),(90,'XC')
+    ),
+    ( #unidades
+        (1,'I'),(2,'II'),(3,'III'),
+        (4,'IV'),(5,'V'),(6,'VI'),
+        (7,'VII'),(8,'VIII'),(9,'IX')
+    )
 )
 
 '''
@@ -61,12 +64,11 @@ def digito_decimal_a_digito_romano(numero,cantidad):
     else:
         return caract_romanos[0] + caract_romanos[2]
 
-def entero_a_romano(num):
+def entero_a_romano(numero_decimal):
     numero_romano = ''
     longitud = {4:'miles',3:'centenas',2:'decenas',1:'unidades'}
-    num = list(num)
-    for pos,i in enumerate(num):
-        numero_romano = numero_romano + digito_decimal_a_digito_romano(int(i),longitud[len(num)-pos])
+    for pos,valor in enumerate(list(numero_decimal)):
+        numero_romano += digito_decimal_a_digito_romano(int(valor),longitud[len(numero_decimal)-pos])
     return numero_romano
 '''
 
@@ -80,7 +82,21 @@ def entero_a_romano(numero):
         longitud -= 1
         digitos[ix] = digitos[ix] + '0' * longitud
 
-    return digitos
+    #procesamos millares
+    traduccion = ''
+    ix = 0
+    for componente in componentes:
+        for cifra, simbolo in componente:
+            if str(cifra) == digitos[ix]:
+                traduccion += simbolo
+                break
+        ix += 1
+    
+    return traduccion
+        
+
+
+        
  
 
 entero_a_romano(336)
