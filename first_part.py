@@ -14,18 +14,19 @@ f) 4.5 -> RomanNumberError("Debe ser un entero")
 
 '''
 Segunda solución con funciones
-def letras_numeros_romanos(cantidad):
-    if cantidad == 'miles':
+def letras_numeros_romanos(pos):
+    #pos -> 0: miles, 1: centenas, 2: decenas, 3: unidades
+    if pos == 0:
         return ('M','','')
-    elif cantidad == 'centenas':
+    elif pos == 1:
         return ('C','D','M')
-    elif cantidad == 'decenas':
+    elif pos == 2:
         return ('X','L','C')
-    elif cantidad == 'unidades':
+    elif pos == 3:
         return ('I','V','X')
 
-def digito_decimal_a_digito_romano(numero,cantidad):
-    caract_romanos = letras_numeros_romanos(cantidad)
+def digito_decimal_a_digito_romano(numero,pos):
+    caract_romanos = letras_numeros_romanos(pos)
     if numero < 4:
         return caract_romanos[0] * numero
     elif numero == 4:
@@ -37,9 +38,8 @@ def digito_decimal_a_digito_romano(numero,cantidad):
 
 def entero_a_romano(numero_decimal):
     numero_romano = ''
-    longitud = {4:'miles',3:'centenas',2:'decenas',1:'unidades'}
-    for pos,valor in enumerate(list(numero_decimal)):
-        numero_romano += digito_decimal_a_digito_romano(int(valor),longitud[len(numero_decimal)-pos])
+    for pos,valor in enumerate(list(str(numero_decimal))):
+        numero_romano += digito_decimal_a_digito_romano(int(valor),pos+(4-len(str(numero_decimal))))
     return numero_romano
 '''
 
@@ -71,13 +71,11 @@ def entero_a_romano(numero):
 
     longitud = len(digitos)
     romano = '' 
-    ix = 0
-    for n in numero:
+    for ix in range(len(numero)):
         longitud -= 1
         digitos[ix] = digitos[ix] + '0' * longitud
         romano += componentes.get(int(digitos[ix]), '')
-        ix += 1
-    
+
     return romano
 
 print(entero_a_romano(336))
