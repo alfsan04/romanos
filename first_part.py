@@ -70,13 +70,14 @@ def entero_a_romano(numero):
     digitos = list(numero)
 
     longitud = len(digitos)
-    traduccion = '' 
-    for ix in range(longitud):
+    romano = '' 
+    ix = 0
+    for n in numero:
         longitud -= 1
         digitos[ix] = digitos[ix] + '0' * longitud
-        traduccion += componentes.get(int(digitos[ix]), '')
+        romano += componentes.get(int(digitos[ix]), '')
         ix += 1
     
-    return traduccion
+    return romano
 
 print(entero_a_romano(336))
